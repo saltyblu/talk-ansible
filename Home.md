@@ -237,12 +237,12 @@ Was das user Modul sonst noch so kann findet man hier: http://docs.ansible.com/a
 * Ansible besitzt ~ 450 standard Module
     * Ziel: einfachheit
 
-### Weiteres kleine Beispiele
+### Beispiele
 Weitere kleine Beispiele liegen in examples/plays
 
 Hier findet man alle ansible standard Module: http://docs.ansible.com/ansible/devel/modules/modules_by_category.html
 
-## Learning Ansible - Playbooks II
+### Ein wenig Mehr
 
 Nun haben wir einen kleinen task erledigt, machen wir nun etwas mehr.
 Installieren wir SSHD und sorgen dafür das er beim systemstart immer ausgeführt wird, eigentlich sollte hier nichts passieren.
@@ -286,11 +286,11 @@ Lasst uns das Prüfen.
 # systemctl status sshd
 ```
 
-### Files
+#### Files Handling
 Ansible kann nicht packages und user verwalten sondern auch Dateien, heirfür gibt es mehrere Möglichkeiten.
 
 
-### Variablen
+### Variables
 * Diese helfen Playbooks unterschiedlic auszuführen
 * Diese kann man beziehen aus:
     * Playbooks selbst
@@ -300,28 +300,29 @@ Ansible kann nicht packages und user verwalten sondern auch Dateien, heirfür gi
     * vom Ziel System (Facts)
     * Ansible Tower
 
-### Facts
+#### Facts
 
-### Templates
-#### Begin
+## Learning Ansible - Simple Templates
+### Begin
 
-### Loops
-#### Begin
+## Learning Ansible - Simple Loops
+### Begin
 http://docs.ansible.com/ansible/devel/user_guide/playbooks_loops.html
 http://docs.ansible.com/ansible/latest/user_guide/playbooks_special_topics.html
 
-### Inventories
+## Learning Ansible - Inventories
 #### Begin
 Ansible benötigt eine liste von Zielen auf denen die Playbooks ausgeführt werden können.
 * Statisch eingetragene Server
 * Custom geschriebene dinge
 * Dynamische generierte Server listen aus Cloud anbietern oder sonsigem (AWS, Consul, Google, uvm...)
 
-### Roles
-#### Begin
+## Learning Ansible - Roles
+### Begin
 
 ### Handlers
 
+### Alles Zusammen
 ## Cheat Cheet
 
 ## Erweitert
