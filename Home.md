@@ -94,18 +94,26 @@ ansible ist ein CLI Tool dies einfach einzusetzen ist.
 * -m gibt das Modul an das ausgeführt werden soll
 * -a Beschreibt die Parameter für das Modul, wessen mit -m übergeben wurde z.B. "user"
 
+#### Aufgabe:
+* Installiert das Programm nginx über die Kommando zeile.
+* Deinstalliert das Programm wieder.
+
 #### Beispiele
 ```shell
 ansible <inventory> options
 ansible localhost -a /bin/date
 ansible localhost -m ping
-ansible localhost -m apt -a "name=vi state=latest"
-ansible localhost -C -m apt -a "name=vi state=latest"
+ansible localhost -m package -a "name=vi state=latest"
+ansible localhost -C -m package -a "name=vi state=latest"
 ```
 #### Check mode
 Prüft die gegebene Situation auf dem System, ändert aber nichts.
 Nicht alle Module untertzüzen den check mode, diese werden übersprungen.
 Dieser kann mit -C benutzt werden
+
+```shell
+ansible localhost -C -m package -a "name=vi state=latest"
+```
 
 ## Was ist ansible
 1. ansible ist eine simple "automation-language"
@@ -368,7 +376,7 @@ Schreibe einen Play der Folgendes Erledigt:
 * service nginx bei jedem start mit hochfahren
 * eine rudimentaere "Welcome Page"
 
-### [Variablen](http://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html)
+## [Ansible - Variablen](http://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html)
 * Variablen helfen Playbooks unterschiedlich auszuführen
 * Diese kann man aus mehreren Quellen beziehen:
     * Command Line
@@ -381,7 +389,7 @@ Schreibe einen Play der Folgendes Erledigt:
 Variablen werden in ansible fast immer mit {{ }} Umklammert und in Playbooks zusätzlich mit "".
 Dies ist ein sehr Komplexes Thema deshalb, wird auch hier nur auf die basics eingegangen.
 
-#### Variable auf der Kommando Zeile
+### Variable auf der Kommando Zeile
 Variablen in der command line werden mittles -e key=value Angegeben, diese können dann im Kompletten ansible scope verwendet werden.
 htop installieren:
 ```shell
@@ -392,7 +400,7 @@ htop deinstallieren:
 ansible localhost -e htop_ensure=present -m package -a "name=htop state={{ htop_ensure }}"
 ```
 
-#### Variablen im Playbook
+### Variablen im Playbook
 ```yaml
 ---
 - hosts: localhost
@@ -407,7 +415,7 @@ ansible localhost -e htop_ensure=present -m package -a "name=htop state={{ htop_
       state: present
 ```
 
-#### Variablen vom Ziel System
+### Variablen vom Ziel System
 
 ```shell
 ansible localhost -m setup
@@ -501,6 +509,10 @@ http://docs.ansible.com/ansible/latest/user_guide/playbooks_special_topics.html
 ## [Ansible - When Statement](http://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html)
 
 ## Ansible - Inventories
+
+### Aufgabe
+Ändert euern play so ab das dieser von eurem rechner eine andere Maschine Provisioniert.
+
 ### Zu Beginn
 Ansible benötigt eine liste von Zielen auf denen die Playbooks ausgeführt werden können.
 * Statisch eingetragene Server
@@ -511,13 +523,36 @@ Ansible benötigt eine liste von Zielen auf denen die Playbooks ausgeführt werd
 ### Zu Beginn
 
 ansible-galaxy ist hier dein freund und Helfer.
+### Struktur
 ```shell
 ansible-galaxy init ansible-nginx
 ```
-### Struktur
-### Includes
 
-### Handlers
+```shell
+ansible-nginx/
+|-- README.md
+|-- defaults
+|   `-- main.yml
+|-- files
+|-- handlers
+|   `-- main.yml
+|-- meta
+|   `-- main.yml
+|-- tasks
+|   `-- main.yml
+|-- templates
+|-- tests
+|   |-- inventory
+|   `-- test.yml
+`-- vars
+    `-- main.yml
+```
+
+#### Aufgabe:
+Machen wir aus dem bisherigen Play ein richtiges Playbook.
+### [Includes](https://docs.ansible.com/ansible/2.4/playbooks_reuse_includes.html)
+
+### [Handlers](http://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#handlers-running-operations-on-change)
 
 ## Alles Zusammen
 ## Cheat Cheet
@@ -528,5 +563,5 @@ ansible-galaxy init ansible-nginx
 ### Tests
 #### Check Mode
 #### Playbooks Tests
-Q#### Asserts
+#### Asserts
 ### Jinja2
