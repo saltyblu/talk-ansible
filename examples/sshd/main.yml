@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  remote_user: root
+  tasks:
+  - name: ensure package openssh-server
+    package:
+      name: openssh-server
+      state: present
+  - name: ensure that sshd is running
+    service:
+      name: sshd
+      enabled: true
+      state: started
+  - name: copy isssue.net
+    copy:
+      src: issue.net
+      dest: /etc/issue.net
+      owner: root
+  - name: Enable issue.net Banner
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^Banner='
+      line: 'Banner=/etc/issue.net'

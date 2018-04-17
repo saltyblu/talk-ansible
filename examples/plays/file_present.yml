@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  remote_user: root
+  tasks:
+  - name: ensure file
+    file:
+      name: /tmp/directory
+      state: directory
+      owner: root
+      group: root
+      mode: 0700

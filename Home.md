@@ -80,7 +80,7 @@ ansible ist ein CLI Tool dies einfach einzusetzen ist.
 ```shell
 # ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie comment='Kathie Wiese"
 ```
-* localhost beschreibt hier die hosts auf denen es ausgeführt werden soll. 
+* localhost beschreibt hier die hosts auf denen es ausgeführt werden soll.
 * -m gibt das Modul an das ausgeführt werden soll
 * -a Beschreibt die Parameter für das Modul, wessen mit -m übergeben wurde z.B. "user"
 
@@ -90,7 +90,12 @@ ansible <inventory> options
 ansible localhost -a /bin/date
 ansible localhost -m ping
 ansible localhost -m apt -a "name=vi state=latest"
+ansible localhost -C -m apt -a "name=vi state=latest"
 ```
+#### Check mode
+Prüft die gegebene Situation auf dem System, ändert aber nichts.
+Nicht alle Module untertzüzen den check mode, diese werden übersprungen.
+Dieser kann mit -C benutzt werden
 
 ## Was ist ansible
 1. ansible ist eine simple "automation-language"
@@ -183,12 +188,14 @@ localhost                  : ok=2    changed=0    unreachable=0    failed=0
 
 Cool, somit habt ihr euren ersten play geschrieben und ausgeführt.
 
-### Play
-Ansible "snippets" werden Plays genannt. Diese Beinhalten aufgaben für eine bestimmte Gruppe von Hosts.
 ### ansible-playbook
 Ansible playbook ist das tool um ansible "plays" und "playbooks" auszuführen.
+* ein playbook benutzt "plays"
+* ein play benutzt "tasks"
+* ein task benutzt "module"
+    * Diese laufen sequentiell ab
 
-### Host & Users
+#### Host & Users
 
 Für jeden Play oder Playbook muss man sich entscheiden für welchen Host und mit welchem User dies ausgeführt wird.
 
@@ -200,58 +207,88 @@ Für jeden Play oder Playbook muss man sich entscheiden für welchen Host und mi
 ```
 Genaueres zu hosts und deren patterns findet man hier: http://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html
 
-### Module Declaration
 
-Schauen wir uns die deklaration eines "modules" genauer an.
+#### Module Declaration
+
+Schauen wir uns die deklaration eines "modules" unter dem Punkt tasks genauer an.
 Es gibt viele verschiedene module in ansible und diese sind immmer recht gleich aufgebaut.
 Bleiben wir bei unserer "Kathie"
 
 ```yml
 # examples/plays/user_absent.yml
-user: # das modul in unserem falle user
-  # die "übergabe Werte" des User-Moduls
-  name: kathie
-  comment: "Kathie Wiese"
-  state: absent
+- name: "ensure user Kathie Wiese" # ein task braucht immer einen namen der dann zur laufzeit angezeigt wird
+  user: # das modul in unserem falle user
+    # die "übergabe Werte" des User-Moduls
+    name: kathie
+    comment: "Kathie Wiese"
+    state: absent
 ```
+#### Tasks
+Ansible "snippets" werden Tasks genannt. Diese beinhalten einzelne Module für eine bestimmte Gruppe von Hosts.
 
 Dies ist auch immernoch mit ansible ausfühbar:
 ```shell
 ansible localhost -m user -a "name=kathie comment='Kathie Wiese' state=absent"
 ```
-
 Was das user Modul sonst noch so kann findet man hier: http://docs.ansible.com/ansible/latest/modules/user_module.html
 
-
-### Check mode
-Prüft die gegebene Situation auf dem System, ändert aber nichts.
-Nicht alle Module untertzüzen den check mode, diese werden übersprungen.
-
-### Module
+#### Module
 * Kontrollieren system resourcen
-* Ansible besitzt ~ 450 Standart module
+* Ansible besitzt ~ 450 standard Module
     * Ziel: einfachheit
 
-## Ansible language basics
+### Weiteres kleine Beispiele
+Weitere kleine Beispiele liegen in examples/plays
 
-### Playbooks
-#### Part 1
-* geschrieben in yaml format
-* diese beschreiben den Endzustand von "Etwas"
-* Komplexität variiert
-#### Part 2
-* ein playbook benutzt "plays"
-* ein play benutzt "tasks"
-* ein task benutzt "module"
-    * Diese laufen sequentiell ab
-bsp
-* Handlers werden von task am ende eines Plays angestoßen
-bsp
+Hier findet man alle ansible standard Module: http://docs.ansible.com/ansible/devel/modules/modules_by_category.html
 
-### Modules
-http://docs.ansible.com/ansible/devel/modules/modules_by_category.html
-bsp.:
+### Ein wenig mehr
 
+Nun haben wir einen kleinen task erledigt, machen wir nun etwas mehr.
+Installieren wir einen NGINX und sorgen dafür das er beim systemstart immer ausgeführt wird.
+```yml
+---
+- hosts: localhost
+  remote_user: root
+  tasks:
+  - name: ensure package ssh
+    package:
+      name: openssh-server
+      state: present
+  - name: ensure that ssh server is running
+    service:
+      name: sshd
+      enabled: true
+      state: started
+```
+
+Der Einzig große unterschied zu vorher hier das wir eine weitere Task definition haben, auch ohne großes ansible verständiss ist dieser "Definition leicht lesbar".
+
+Ergebniss:
+```shell
+PLAY [localhost] **************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [ensure package ssh] ***************************************************************************************************************************************************************************************
+changed: [localhost]
+
+TASK [ensure that ssh server is running] *******************************************************************************************************************************************************************************
+changed: [localhost]
+
+PLAY RECAP ********************************************************************************************************************************************************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0
+```
+
+Lasst uns das Prüfen.
+```shell
+# systemctl status sshd
+```
+
+
+
+########
 ### Variablen
 * Diese helfen Playbooks unterschiedlic auszuführen
 * Diese kann man beziehen aus:
