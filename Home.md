@@ -3,7 +3,7 @@
 [[_TOC_]]
 
 ## Allgemeines
-[Allgemeines](talk/01_allgemein.md)
+[Allgemeines](talk/01_allgemein)
 ## Getting Started
 
 ## Ansible Architektur & Aufbau

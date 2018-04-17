@@ -7,7 +7,7 @@ services:
   tansible:
     image: "urlaub/gollum"
     volumes:
-      - ".:/gollum"
+      - ".:/gollum:ro"
     ports:
       - "1337:80"
       - "4567"
