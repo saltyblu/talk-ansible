@@ -2,22 +2,32 @@
 
 [[_TOC_]]
 
-## [Installation](https://docs.ansilbe.com/ansible/intro_installation.html)
+## [Installation](https://docs.ansible.com/ansible/intro_installation.html)
 
 Ansible wird einfach über den Packet manager installiert, oder über pip.
 ```shell
-pip install ansible
+$ sudo apt-get update
+$ sudo apt-get install software-properties-common
+$ sudo apt-add-repository ppa:ansible/ansible
+$ sudo apt-get update
+$ sudo apt-get install ansible
 ```
 
 Prüfen ob ansible "funktioniert"
 ```shell
-ansible --version
+# ansible --version
+ansible 2.5.0
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = [u'/root/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python2.7/dist-packages/ansible
+  executable location = /usr/bin/ansible
+  python version = 2.7.12 (default, Dec  4 2017, 14:50:18) [GCC 5.4.0 20160609]
 ```
-## Ansible erstes Verständniss
+## Ansible erstes Verständnis
 
 Ansible ist als CLI Tool nutzbar und kann somit sehr einfach ausgeführt werden.
 
-### Begin
+### Zu Beginn
 Erstellen wir im ersten beispiel einen neuen User:
 ```shell
 # ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie"
@@ -244,6 +254,8 @@ Hier findet man alle ansible standard Module: http://docs.ansible.com/ansible/de
 
 ### Ein wenig Mehr
 
+#### Zu Beginn
+
 Nun haben wir einen kleinen task erledigt, machen wir nun etwas mehr.
 Installieren wir SSHD und sorgen dafür das er beim systemstart immer ausgeführt wird, eigentlich sollte hier nichts passieren.
 ```yml
@@ -286,29 +298,207 @@ Lasst uns das Prüfen.
 # systemctl status sshd
 ```
 
-#### Files Handling
+#### Datei Verwaltung
 Ansible kann nicht packages und user verwalten sondern auch Dateien, heirfür gibt es mehrere Möglichkeiten.
 
+Zurück zu unserem vorherigen Beispiel sshd, lass uns dieses etwas erweiern.
 
-### Variablen
-* Diese helfen Playbooks unterschiedlic auszuführen
-* Diese kann man beziehen aus:
-    * Playbooks selbst
+```yaml
+<snip>
+  - name: ensure etc/banner
+    file:
+      state: directory
+      dest: /etc/banner
+      owner: root
+  - name: copy isssue.net
+    copy:
+      src: issue.net
+      dest: /etc/banner/issue.net
+      owner: root
+  - name: Enable issue.net Banner
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^Banner='
+      line: 'Banner=/etc/banner/issue.net'
+</snip>
+
+```
+```shell
+PLAY [localhost] ***************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [ensure etc/banner] *******************************************************
+changed: [localhost]
+
+TASK [copy isssue.net] *********************************************************
+changed: [localhost]
+
+TASK [Enable issue.net Banner] *************************************************
+changed: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=4    changed=3    unreachable=0    failed=0
+```
+
+All diese Module sind standard Module und lange nicht alle, was machen diese im genau?
+Eine Liste aller "File" Module findet man hier: http://docs.ansible.com/ansible/latest/modules/list_of_files_modules.html
+##### Module: File
+Dieses Modul beschreibt den Zustand einer Datei.
+http://docs.ansible.com/ansible/devel/modules/file_module.html
+##### Module: Copy
+Kopiert Daten vom "Server" System zum Ziel System.
+http://docs.ansible.com/ansible/latest/modules/copy_module.html#copy
+##### Module: lineinfile
+Es ist auch möglich nur einzelne teile einer Datei zu verändern und den Rest unverändert zu lassen.
+http://docs.ansible.com/ansible/latest/modules/lineinfile_module.html#lineinfile
+
+#### Zusammenfassung
+Nun haben wir schon einiges gesehen:
+* ansible plays
+* das Zusammenführen von mehreren Tasks in einem play
+* Manipulation von "services", Dateien, Paketen und Benutzern
+
+#### Aufgabe
+
+Schreibe einen Play der Folgendes Erledigt:
+* nginx installieren
+* service nginx starten
+* service nginx bei jedem start mit hochfahren
+* eine rudimentaere "Welcome Page"
+
+### [Variablen](http://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html)
+* Variablen helfen Playbooks unterschiedlich auszuführen
+* Diese kann man aus mehreren Quellen beziehen:
+    * Command Line
+    * Den Playbooks selbst
     * Files
     * Inventory (group vars, host vars)
-    * Command Line
-    * vom Ziel System (Facts)
+    * Vom Ziel System (Facts)
     * Ansible Tower
 
-#### Facts
+Variablen werden in ansible fast immer mit {{ }} Umklammert und in Playbooks zusätzlich mit "".
+Dies ist ein sehr Komplexes Thema deshalb, wird auch hier nur auf die basics eingegangen.
 
-## Ansible - Simple Templates
-### Zu Beginn
+#### Variable auf der Kommando Zeile
+Variablen in der command line werden mittles -e key=value Angegeben, diese können dann im Kompletten ansible scope verwendet werden.
+htop installieren:
+```shell
+ansible localhost -e htop_ensure=present -m package -a "name=htop state={{ htop_ensure }}"
+```
+htop deinstallieren:
+```shell
+ansible localhost -e htop_ensure=present -m package -a "name=htop state={{ htop_ensure }}"
+```
 
-## Ansible - Simple Loops
+#### Variablen im Playbook
+```yaml
+---
+- hosts: localhost
+  remote_user: root
+  vars:
+    user_comment: "Kathie Wiese"
+  tasks:
+  - name: ensure user Kathie Wiese
+    user:
+      name: kathie
+      comment: "{{ user_comment }}"
+      state: present
+```
+
+#### Variablen vom Ziel System
+
+```shell
+ansible localhost -m setup
+```
+```yml
+localhost | SUCCESS => {
+    "ansible_facts": {
+        "ansible_apparmor": {
+            "status": "disabled"
+        },
+        "ansible_architecture": "x86_64",
+        "ansible_bios_date": "07/04/2017",
+        "ansible_bios_version": "1.3.7",
+        "ansible_cmdline": {
+            "acpi_backlight": "vendor",
+            "cryptdevice": "/dev/nvme0n1p2:cryptroot",
+            "initrd": "\\initramfs-linux.img",
+            "root": "/dev/mapper/cryptroot",
+            "rw": true
+        },
+        "ansible_date_time": {
+            "date": "2018-04-17",
+            "day": "17",
+            "epoch": "1523978477",
+            "hour": "15",
+            "iso8601": "2018-04-17T15:21:17Z",
+            "iso8601_basic": "20180417T152117234552",
+            "iso8601_basic_short": "20180417T152117",
+            "iso8601_micro": "2018-04-17T15:21:17.234600Z",
+            "minute": "21",
+            "month": "04",
+            "second": "17",
+            "time": "15:21:17",
+            "tz": "UTC",
+            "tz_offset": "+0000",
+            "weekday": "Tuesday",
+            "weekday_number": "2",
+            "weeknumber": "16",
+            "year": "2018"
+        },
+...
+```
+
+Wow, was ein haufen, all diese Variablen sind von ansible nutzbar.
+Dieser Vorgang nennt sich bei Playbooks gathering_facts und wird vor jeden Play für jeden host ausgeführt.
+Dies kann man aber auch deaktivieren, falls man diese variablen nicht braucht:
+
+```yml
+hosts: localhost
+remote_user: root
+gathering_facts: no # deaktiviert diese
+tasks:
+...
+```
+
+## [Ansible - Simple Templates](http://docs.ansible.com/ansible/latest/modules/template_module.html)
+Jetzt hat man all den Kram, nun wie wendet man das Sinnvoll an?
 ### Zu Beginn
+Dies ist ein sehr Komplexes Thema deshalb, wird auch hier nur auf die Basics eingegangen.
+
+```yaml
+hosts: localhost
+remote_user: root
+gathering_facts: no
+vars:
+  issue_text: "Welcome to my server"
+tasks:
+  - name: "Templating issue.net"
+    template:
+      src: issue.net.j2
+      dest: /etc/banner/issue.net
+      owner: root
+      group: root
+      mode: 0644
+```
+
+```shell
+# cat issue.net.j2
+Ansible generated message:
+{{ issue_text }}
+```
+
+### Aufgabe:
+
+## [Ansible - Einfache Schleifen](http://docs.ansible.com/ansible/devel/user_guide/playbooks_loops.html)
+### Zu Beginn
+In ansible sind schleifen möglich um komplexe aufgaben zu erldigen.
 http://docs.ansible.com/ansible/devel/user_guide/playbooks_loops.html
 http://docs.ansible.com/ansible/latest/user_guide/playbooks_special_topics.html
+
+## [Ansible - When Statement](http://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html)
 
 ## Ansible - Inventories
 ### Zu Beginn
@@ -317,8 +507,15 @@ Ansible benötigt eine liste von Zielen auf denen die Playbooks ausgeführt werd
 * Custom geschriebene dinge
 * Dynamische generierte Server listen aus Cloud anbietern oder sonsigem (AWS, Consul, Google, uvm...)
 
-## Ansible - Rolles
-### zu Beginn
+## Ansible - Roles
+### Zu Beginn
+
+ansible-galaxy ist hier dein freund und Helfer.
+```shell
+ansible-galaxy init ansible-nginx
+```
+### Struktur
+### Includes
 
 ### Handlers
 
@@ -331,5 +528,5 @@ Ansible benötigt eine liste von Zielen auf denen die Playbooks ausgeführt werd
 ### Tests
 #### Check Mode
 #### Playbooks Tests
-#### Asserts
+Q#### Asserts
 ### Jinja2
