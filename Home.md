@@ -1,3 +1,3 @@
 # Ansible
 
-[Der Anfang](getting-started.md)
+[Der Anfang](getting-started)
