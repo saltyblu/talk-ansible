@@ -1,0 +1,1 @@
+ubuntu ansible_port=1022 ansible_host=localhost ansible_user=root
