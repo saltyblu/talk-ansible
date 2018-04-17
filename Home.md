@@ -2,7 +2,7 @@
 
 [[_TOC_]]
 
-## [Installation](https://docs.ansibe.com/ansible/intro_installation.html)
+## [Installation](https://docs.ansilbe.com/ansible/intro_installation.html)
 
 Ansible wird einfach über den Packet manager installiert, oder über pip.
 ```shell
@@ -320,8 +320,10 @@ Ansible benötigt eine liste von Zielen auf denen die Playbooks ausgeführt werd
 ### Roles
 #### Begin
 
-
 ### Handlers
+
+## Cheat Cheet
+
 ## Erweitert
 
 ### Ansible Galaxy
