@@ -10,4 +10,3 @@ services:
       - ".:/gollum:ro"
     ports:
       - "1337:80"
-      - "4567"
