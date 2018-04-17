@@ -2,17 +2,120 @@
 
 [[_TOC_]]
 
-## Allgemeines
-[Allgemeines](talk/01_allgemein)
 ## Getting Started
 
-## Ansible Architektur & Aufbau
+### [Installation](https://docs.ansibe.com/ansible/intro_installation.html)
+
+Ansible wird einfach über den Packet manager installiert, oder über pip.
+```shell
+pip install ansible
+```
+
+Prüfen ob ansible "funktioniert"
+```shell
+ansible --version
+```
+### Ansible Erstes Verständniss
+
+Ansible ist als CLI Tool nutzbar und kann somit sehr einfach ausgeführt werden.
+
+Erstellen wir im ersten beispiel einen neuen User:
+```shell
+# ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie"
+
+ubuntu | SUCCESS => {
+    "changed": true,
+    "comment": "",
+    "create_home": true,
+    "group": 1000,
+    "home": "/home/kathie",
+    "name": "kathi",
+    "shell": "",
+    "state": "present",
+    "system": false,
+    "uid": 1000
+}
+```
+Ansible hat die "Resource" user mit dem namen kathie angelegt.
+Was passiert wenn wir diesen Command nocheinmal ausführen?
+
+```shell
+# ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie"
+ubuntu | SUCCESS => {
+    "append": false,
+    "changed": false,
+    "comment": "",
+    "group": 1000,
+    "home": "/home/kathie",
+    "move_home": false,
+    "name": "kathie",
+    "shell": "",
+    "state": "present",
+    "uid": 1000
+}
+```
+
+Verändern wir nun das comment des Users und schauen was passiert.
+```shell
+# ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie comment='Kathie Wiese"
+
+ubuntu | SUCCESS => {
+    "append": false,
+    "changed": true,
+    "comment": "Kathie Wiese",
+    "group": 1000,
+    "home": "/home/kathi",
+    "move_home": false,
+    "name": "kathi",
+    "shell": "",
+    "state": "present",
+    "uid": 1000
+}
+```
+
+Dabei fällt aus, dass changed nun wieder auf true steht und der comment nun nicht mehr leer ist.
+
+#### Zusammenfassung
+Ansible ist eine "configuration Management", eine Sprache um infrastruktur zu beschreiben.
+
+## Allgemeines zu ansible
+### Was ist ansible
+1. ansible ist eine simple "automation-language"
+2. außerdem ist ansible auch die "automation engine" die "playbooks" ausführt
+
+### Kernziele
+* Einfachheit
+    * "Human readable"
+    * simples yaml Format
+    * jeder soll Ansible lesen und verstehen können ohne es zu kennen
+    * simple Struktur, Code wird immer von oben nach unten ausgeführt (in order)
+    * schnell "produktiv" gehen
+* Powerfull
+    * ist "einfach" Anwendbar auf bestehende Infrastruktur
+    * workflow automatisierung
+    * "Lifecycle" automatisierung
+* Agentless
+    * benötigt nur SSH Zugriff (oder WinRM)
+        * keine weiteren Firewall configs nötig...
+    * keine "clients" die man ausnutzen oder aktuell halten muss.
+
+### Zielsetzung
+Ansible versucht jeden schnell an die Automatisierung von IT-Infrastruktur/Prozessen zu bringen und dabei kompläxität zu verringern.
+### Unterschied zu Anderen Programmiersprachen
+Ansible ist eine Sprache die den zu erreichenden zustand beschreibt. nicht wie man zu dem Zustand kommt.
+
+### Was kann ansible
+* Config Management
+* App Deployment
+* Provisionierung
+* Continous Delivery
+* Security Compliance
+* Orchistration
+
+## Architektur & Aufbau
  --- Bild User -> Playbook -> Inventory/Plugins/Modules/API -> Infrastruktur -> Rechner
                                                                              -> Networking
                                                                              -> Cloud
-
-## Installation
-https://docs.ansibe.com/ansible/intro_installation.html
 
 ## Ansible ausführen
 
