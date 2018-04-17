@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  remote_user: root
+  tasks:
+  - name: ensure user Kathie Wiese
+    user:
+      name: kathie
+      comment: "Kathie Wiese"
+      state: absent
