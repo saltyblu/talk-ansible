@@ -63,9 +63,9 @@ ubuntu | SUCCESS => {
     "changed": true,
     "comment": "Kathie Wiese",
     "group": 1000,
-    "home": "/home/kathi",
+    "home": "/home/kathie",
     "move_home": false,
-    "name": "kathi",
+    "name": "kathie",
     "shell": "",
     "state": "present",
     "uid": 1000
@@ -141,7 +141,7 @@ Der Eben erstelle User sollte noch existieren, versuchen wir ihn nun wieder zu l
 Hierfür benutzen wir nun einen "task" und subtool "ansible-playbook"
 
 ### Begin
-Legen wir eine Datei im system an mit folgendem inhalt:
+Erstellen wir eine Datei auf dem Server mit folgendem Inhalt:
 
 ```yml
 ---
@@ -245,7 +245,7 @@ Hier findet man alle ansible standard Module: http://docs.ansible.com/ansible/de
 ### Ein wenig mehr
 
 Nun haben wir einen kleinen task erledigt, machen wir nun etwas mehr.
-Installieren wir einen NGINX und sorgen dafür das er beim systemstart immer ausgeführt wird.
+Installieren wir SSHD und sorgen dafür das er beim systemstart immer ausgeführt wird, eigentlich sollte hier nichts passieren.
 ```yml
 ---
 - hosts: localhost
@@ -286,9 +286,9 @@ Lasst uns das Prüfen.
 # systemctl status sshd
 ```
 
-#### Files
+### Files
+Ansible kann nicht packages und user verwalten sondern auch Dateien, heirfür gibt es mehrere Möglichkeiten.
 
-tbd
 
 ### Variablen
 * Diese helfen Playbooks unterschiedlic auszuführen
@@ -300,19 +300,34 @@ tbd
     * vom Ziel System (Facts)
     * Ansible Tower
 
+### Facts
+
+### Templates
+#### Begin
+
+### Loops
+#### Begin
+http://docs.ansible.com/ansible/devel/user_guide/playbooks_loops.html
+http://docs.ansible.com/ansible/latest/user_guide/playbooks_special_topics.html
+
 ### Inventories
+#### Begin
 Ansible benötigt eine liste von Zielen auf denen die Playbooks ausgeführt werden können.
 * Statisch eingetragene Server
 * Custom geschriebene dinge
 * Dynamische generierte Server listen aus Cloud anbietern oder sonsigem (AWS, Consul, Google, uvm...)
 
 ### Roles
+#### Begin
 
+
+### Handlers
 ## Erweitert
 
-## Loops
-http://docs.ansible.com/ansible/devel/user_guide/playbooks_loops.html
-http://docs.ansible.com/ansible/latest/user_guide/playbooks_special_topics.html
+### Ansible Galaxy
+### Tests
+#### Check Mode
+#### Playbooks Tests
 
-## Ansible Galaxy
-## Testen
+#### Asserts
+### Jinja2

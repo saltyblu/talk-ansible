@@ -11,13 +11,18 @@
       name: sshd
       enabled: true
       state: started
+  - name: ensure etc/banner
+    file:
+      state: directory
+      dest: /etc/banner
+      owner: root
   - name: copy isssue.net
     copy:
       src: issue.net
-      dest: /etc/issue.net
+      dest: /etc/banner/issue.net
       owner: root
   - name: Enable issue.net Banner
     lineinfile:
       path: /etc/ssh/sshd_config
       regexp: '^Banner='
-      line: 'Banner=/etc/issue.net'
+      line: 'Banner=/etc/banner/issue.net'
