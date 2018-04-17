@@ -242,7 +242,7 @@ Weitere kleine Beispiele liegen in examples/plays
 
 Hier findet man alle ansible standard Module: http://docs.ansible.com/ansible/devel/modules/modules_by_category.html
 
-### Ein wenig mehr
+## Learning Ansible - Playbooks II
 
 Nun haben wir einen kleinen task erledigt, machen wir nun etwas mehr.
 Installieren wir SSHD und sorgen dafür das er beim systemstart immer ausgeführt wird, eigentlich sollte hier nichts passieren.
