@@ -84,7 +84,7 @@ ansible ist ein CLI Tool dies einfach einzusetzen ist.
 * -m gibt das Modul an das ausgeführt werden soll
 * -a Beschreibt die Parameter für das Modul, wessen mit -m übergeben wurde z.B. "user"
 
-#### Weitere Beispiele
+#### Beispiele
 ```shell
 ansible <inventory> options
 ansible localhost -a /bin/date
@@ -135,12 +135,12 @@ Ansible ist eine Sprache die den zu erreichenden zustand beschreibt. nicht wie m
                                                                              -> Networking
                                                                              -> Cloud
 
-## Learning Ansible - Playbooks
+## Ansible - Playbooks
 
 Der Eben erstelle User sollte noch existieren, versuchen wir ihn nun wieder zu löschen.
 Hierfür benutzen wir nun einen "task" und subtool "ansible-playbook"
 
-### Begin
+### Zu Beginn
 Erstellen wir eine Datei auf dem Server mit folgendem Inhalt:
 
 ```yml
@@ -208,7 +208,7 @@ Für jeden Play oder Playbook muss man sich entscheiden für welchen Host und mi
 Genaueres zu hosts und deren patterns findet man hier: http://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html
 
 
-#### Module Declaration
+#### Modul Deklarierung
 
 Schauen wir uns die deklaration eines "modules" unter dem Punkt tasks genauer an.
 Es gibt viele verschiedene module in ansible und diese sind immmer recht gleich aufgebaut.
@@ -290,7 +290,7 @@ Lasst uns das Prüfen.
 Ansible kann nicht packages und user verwalten sondern auch Dateien, heirfür gibt es mehrere Möglichkeiten.
 
 
-### Variables
+### Variablen
 * Diese helfen Playbooks unterschiedlic auszuführen
 * Diese kann man beziehen aus:
     * Playbooks selbst
@@ -302,27 +302,27 @@ Ansible kann nicht packages und user verwalten sondern auch Dateien, heirfür gi
 
 #### Facts
 
-## Learning Ansible - Simple Templates
-### Begin
+## Ansible - Simple Templates
+### Zu Beginn
 
-## Learning Ansible - Simple Loops
-### Begin
+## Ansible - Simple Loops
+### Zu Beginn
 http://docs.ansible.com/ansible/devel/user_guide/playbooks_loops.html
 http://docs.ansible.com/ansible/latest/user_guide/playbooks_special_topics.html
 
-## Learning Ansible - Inventories
-#### Begin
+## Ansible - Inventories
+### Zu Beginn
 Ansible benötigt eine liste von Zielen auf denen die Playbooks ausgeführt werden können.
 * Statisch eingetragene Server
 * Custom geschriebene dinge
 * Dynamische generierte Server listen aus Cloud anbietern oder sonsigem (AWS, Consul, Google, uvm...)
 
-## Learning Ansible - Roles
-### Begin
+## Ansible - Rolles
+### zu Beginn
 
 ### Handlers
 
-### Alles Zusammen
+## Alles Zusammen
 ## Cheat Cheet
 
 ## Erweitert
@@ -331,6 +331,5 @@ Ansible benötigt eine liste von Zielen auf denen die Playbooks ausgeführt werd
 ### Tests
 #### Check Mode
 #### Playbooks Tests
-
 #### Asserts
 ### Jinja2
