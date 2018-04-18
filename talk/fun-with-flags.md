@@ -9,7 +9,7 @@ Lass uns das Pferd mal anders aufziehen.
 ## Google Hangouts
 
 
-## Ssh Geopip
+## SSH Geopip
 * https://www.axllent.org/docs/view/ssh-geoip/
 
 
