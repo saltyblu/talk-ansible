@@ -531,6 +531,8 @@ tasks:
 ...
 ```
 
+### [Variablen Scope](http://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
+
 ## [Ansible - Simple Templates](http://docs.ansible.com/ansible/latest/modules/template_module.html)
 Jetzt hat man all den Kram, nun wie wendet man das Sinnvoll an?
 ### Zu Beginn
@@ -685,14 +687,13 @@ Machen wir aus dem bisherigen Play ein richtiges Playbook.
 
 ### [Handlers](http://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#handlers-running-operations-on-change)
 
-## Alles Zusammen
-## Cheat Cheet
-
 ## Erweitert
 
-### Ansible Galaxy
-### Tests
-#### Check Mode
-#### Playbooks Tests
-#### Asserts
-### Jinja2
+### [Ansible Galaxy](http://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html)
+* https://galaxy.ansible.com/
+### [Tests](http://docs.ansible.com/ansible/latest/reference_appendices/test_strategies.html)
+* Check Mode
+* Playbooks Tests
+* [Asserts](http://docs.ansible.com/ansible/latest/reference_appendices/test_strategies.html)
+
+### [Jinja2](https://docs.ansible.com/ansible/devel/user_guide/playbooks_templating.html)
