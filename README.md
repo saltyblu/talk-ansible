@@ -105,7 +105,7 @@ ubuntu | SUCCESS => {
     "uid": 1000
 }
 ```
-Ansible hat die "Resource" user mit dem namen Kathie angelegt.
+Ansible hat die "Resource" User mit dem namen Kathie angelegt.
 Was passiert wenn wir diesen Kommando nocheinmal ausführen?
 
 ```shell
@@ -182,23 +182,23 @@ ansible localhost -C -m package -a "name=vi state=latest"
 ### Kernziele
 * Einfachheit
     * "Human readable"
-    * simples yaml Format
-    * jeder soll Ansible lesen und verstehen können ohne es zu kennen
-    * simple Struktur, Code wird immer von oben nach unten ausgeführt (in order)
-    * schnell "produktiv" gehen
+    * Simples yaml Format
+    * Jeder soll Ansible lesen und verstehen können ohne es zu kennen
+    * Simple Struktur, Code wird immer von oben nach unten ausgeführt (in order)
+    * Schnell "produktiv" gehen
 * Powerfull
-    * ist "einfach" Anwendbar auf bestehende Infrastruktur
-    * workflow automatisierung
-    * "Lifecycle" automatisierung
+    * "einfach" Anwendbar auf bestehende Infrastruktur
+    * Workflow Automatisierung
+    * "Lifecycle" Automatisierung
 * Agentless
     * benötigt nur SSH Zugriff (oder WinRM)
-        * keine weiteren Firewall configs nötig...
+        * keine weiteren Firewall konfigurationen nötig...
     * keine "clients" die man ausnutzen oder aktuell halten muss.
 
 ### Zielsetzung
-Ansible versucht jeden schnell an die Automatisierung von IT-Infrastruktur/Prozessen zu bringen und dabei kompläxität zu verringern.
-### Unterschied zu Anderen Programmiersprachen
-Ansible ist eine Sprache die den zu erreichenden zustand beschreibt. nicht wie man zu dem Zustand kommt.
+Ansible versucht jeden schnell an die Automatisierung von IT-Infrastruktur/Prozessen zu bringen und dabei Kompläxität zu verringern.
+### Unterschied zu anderen Programmiersprachen
+Ansible ist eine Sprache die den zu erreichenden Zustand beschreibt, nicht wie man zu dem Zustand kommt.
 
 ### Was kann ansible
 * Config Management
@@ -216,8 +216,8 @@ Quelle: https://www.ansible.com/resources/videos/quick-start-video
 
 ## Ansible - Playbooks
 
-Der Eben erstelle User sollte noch existieren, versuchen wir ihn nun wieder zu löschen.
-Hierfür benutzen wir nun einen "task" und subtool "ansible-playbook"
+Der eben erstelle User sollte noch existieren, versuchen wir ihn nun wieder zu löschen.
+Hierfür benutzen wir nun einen "task" und das Subtool "ansible-playbook"
 
 ### Zu Beginn
 Erstellen wir eine Datei auf dem Server mit folgendem Inhalt:
@@ -269,28 +269,28 @@ Cool, somit habt ihr euren ersten play geschrieben und ausgeführt.
 
 ### ansible-playbook
 Ansible playbook ist das tool um ansible "plays" und "playbooks" auszuführen.
-* ein playbook benutzt "plays"
-* ein play benutzt "tasks"
-* ein task benutzt "module"
+* Ein Playbook benutzt "plays"
+* Ein Play benutzt "tasks"
+* Ein Task benutzt "module"
     * Diese laufen sequentiell ab
 
 #### Host & Users
 
-Für jeden Play oder Playbook muss man sich entscheiden für welchen Host und mit welchem User dies ausgeführt wird.
+Für jeden Play oder Playbook muss man sich entscheiden für welchen Host und mit welchem User dies ausgeführt werden soll.
 
 ```yml
 # examples/plays/user_absent.yml
 ---
 - hosts: localhost # diese Zeile beschreibt für welche hosts der Play oder das Playbook ausgeführt werden soll.
-  remote_user: root # beschreib als welcher user der play ausgeführt werden soll.
+  remote_user: root # beschreibt als welcher user der Play ausgeführt werden soll.
 ```
-Genaueres zu hosts und deren patterns findet man hier: http://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html
+Genaueres zu Hosts und deren Patterns findet man hier: http://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html
 
 
 #### Modul Deklarierung
 
-Schauen wir uns die deklaration eines "modules" unter dem Punkt tasks genauer an.
-Es gibt viele verschiedene module in ansible und diese sind immmer recht gleich aufgebaut.
+Schauen wir uns die Deklaration eines "modules" unter dem Punkt: "Tasks" genauer an.
+Es gibt viele verschiedene Module in Ansible und diese sind immmer recht ähnlich aufgebaut.
 Bleiben wir bei unserer "Kathie"
 
 ```yml
@@ -303,18 +303,18 @@ Bleiben wir bei unserer "Kathie"
     state: absent
 ```
 #### Tasks
-Ansible "snippets" werden Tasks genannt. Diese beinhalten einzelne Module für eine bestimmte Gruppe von Hosts.
+Solche "snippets" werden Tasks genannt. Diese beinhalten einzelne Module für eine bestimmte Gruppe von Hosts.
 
-Dies ist auch immernoch mit ansible ausfühbar:
+Dies ist auch immernoch mit "ansible" ausfühbar:
 ```shell
 ansible localhost -m user -a "name=kathie comment='Kathie Wiese' state=absent"
 ```
 Was das user Modul sonst noch so kann findet man hier: http://docs.ansible.com/ansible/latest/modules/user_module.html
 
 #### Module
-* Kontrollieren system resourcen
+* Kontrollieren System-Resourcen
 * Ansible besitzt ~ 450 standard Module
-    * Ziel: einfachheit
+    * Ziel: Einfachheit
 
 ### Beispiele
 Weitere kleine Beispiele liegen in examples/plays
@@ -325,8 +325,8 @@ Hier findet man alle ansible standard Module: http://docs.ansible.com/ansible/de
 
 #### Zu Beginn
 
-Nun haben wir einen kleinen task erledigt, machen wir nun etwas mehr.
-Installieren wir SSHD und sorgen dafür das er beim systemstart immer ausgeführt wird, eigentlich sollte hier nichts passieren.
+Nun haben wir einen kleinen Task erledigt, machen wir nun etwas mehr.
+Installieren wir SSHD und sorgen dafür das er beim Systemstart immer ausgeführt wird, eigentlich sollte hier nichts passieren.
 ```yml
 ---
 - hosts: localhost
@@ -343,9 +343,9 @@ Installieren wir SSHD und sorgen dafür das er beim systemstart immer ausgeführ
       state: started
 ```
 
-Der Einzig große unterschied zu vorher hier das wir eine weitere Task definition haben, auch ohne großes ansible verständiss ist dieser "Definition leicht lesbar".
+Der Einzig große unterschied zu vorher, ist das wir eine weitere Task definition haben, auch ohne großes Ansible-Verständis ist dieser "Definition leicht lesbar".
 
-Ergebniss:
+Ergebnis:
 ```shell
 PLAY [localhost] **************************************************************************************************************************************************************************************************
 
@@ -368,7 +368,7 @@ Lasst uns das Prüfen.
 ```
 
 #### Datei Verwaltung
-Ansible kann nicht packages und user verwalten sondern auch Dateien, heirfür gibt es mehrere Möglichkeiten.
+Ansible kann nicht nur Pakete und Benutzer verwalten sondern auch Dateien, heirfür gibt es mehrere Möglichkeiten.
 
 Zurück zu unserem vorherigen Beispiel sshd, lass uns dieses etwas erweiern.
 
@@ -411,7 +411,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=4    changed=3    unreachable=0    failed=0
 ```
 
-All diese Module sind standard Module und lange nicht alle, was machen diese im genau?
+All diese Module sind standard Module und lange nicht alle, was machen diese denn genau?
 Eine Liste aller "File" Module findet man hier: http://docs.ansible.com/ansible/latest/modules/list_of_files_modules.html
 ##### Module: File
 Dieses Modul beschreibt den Zustand einer Datei.
@@ -420,22 +420,22 @@ http://docs.ansible.com/ansible/devel/modules/file_module.html
 Kopiert Daten vom "Server" System zum Ziel System.
 http://docs.ansible.com/ansible/latest/modules/copy_module.html#copy
 ##### Module: lineinfile
-Es ist auch möglich nur einzelne teile einer Datei zu verändern und den Rest unverändert zu lassen.
+Es ist auch möglich nur einzelne Teile einer Datei zu verändern und den Rest unverändert zu lassen.
 http://docs.ansible.com/ansible/latest/modules/lineinfile_module.html#lineinfile
 
 #### Zusammenfassung
 Nun haben wir schon einiges gesehen:
-* ansible plays
-* das Zusammenführen von mehreren Tasks in einem play
+* Ansible Plays
+* Das Zusammenführen von mehreren Tasks in einem Play
 * Manipulation von "services", Dateien, Paketen und Benutzern
 
 #### Aufgabe
 
 Schreibe einen Play der Folgendes Erledigt:
-* nginx installieren
-* service nginx starten
-* service nginx bei jedem start mit hochfahren
-* eine rudimentaere "Welcome Page"
+* Nginx installieren
+* Service nginx starten
+* Service nginx bei jedem start mit hochfahren
+* Eine rudimentaere "Welcome Page"
 
 ## [Ansible - Variablen](http://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html)
 * Variablen helfen Playbooks unterschiedlich auszuführen
@@ -447,11 +447,13 @@ Schreibe einen Play der Folgendes Erledigt:
     * Vom Ziel System (Facts)
     * Ansible Tower
 
-Variablen werden in ansible fast immer mit {{ }} Umklammert und in Playbooks zusätzlich mit "".
-Dies ist ein sehr Komplexes Thema deshalb, wird auch hier nur auf die basics eingegangen.
+Variablen werden in Ansible fast immer mit {{ }} umklammert und in Playbooks zusätzlich mit "".
+Dies ist ein sehr komplexes Thema deshalb, wird auch hier nur auf die Basics eingegangen.
 
 ### Variable auf der Kommando Zeile
-Variablen in der command line werden mittles -e key=value Angegeben, diese können dann im Kompletten ansible scope verwendet werden.
+Variablen in der Commandline werden mittles -e key=value angegeben, diese können dann im kompletten Ansible-Kontext verwendet werden.
+
+#### Beispiel:
 htop installieren:
 ```shell
 ansible localhost -e htop_ensure=present -m package -a "name=htop state={{ htop_ensure }}"
@@ -521,8 +523,8 @@ localhost | SUCCESS => {
 ...
 ```
 
-Wow, was ein haufen, all diese Variablen sind von ansible nutzbar.
-Dieser Vorgang nennt sich bei Playbooks gathering_facts und wird vor jeden Play für jeden host ausgeführt.
+Wow, was ein haufen, all diese Variablen sind im ansible Play nutzbar.
+Dieser Vorgang nennt sich bei Playbooks gathering_facts und wird vor jeden Play für jeden Host ausgeführt.
 Dies kann man aber auch deaktivieren, falls man diese variablen nicht braucht:
 
 ```yml
@@ -540,7 +542,6 @@ tasks:
 ## [Ansible - Simple Templates](http://docs.ansible.com/ansible/latest/modules/template_module.html)
 Jetzt hat man all den Kram, nun wie wendet man das Sinnvoll an?
 ### Zu Beginn
-Dies ist ein sehr Komplexes Thema deshalb, wird auch hier nur auf die Basics eingegangen.
 
 ```yaml
 hosts: localhost
@@ -568,7 +569,7 @@ Ansible generated message:
 
 ## [Ansible - Einfache Schleifen](http://docs.ansible.com/ansible/devel/user_guide/playbooks_loops.html)
 ### Zu Beginn
-In ansible sind schleifen möglich um komplexe aufgaben zu erldigen.
+In Ansible sind Schleifen möglich um komplexere Aufgaben zu erldigen.
 http://docs.ansible.com/ansible/devel/user_guide/playbooks_loops.html
 http://docs.ansible.com/ansible/latest/user_guide/playbooks_special_topics.html
 
@@ -577,16 +578,16 @@ http://docs.ansible.com/ansible/latest/user_guide/playbooks_special_topics.html
 ## [Ansible - Inventories](http://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html)
 
 ### Zu Beginn
-Ansible benötigt eine liste von Zielen auf denen die Playbooks ausgeführt werden können.
+Ansible benötigt eine Liste von Zielen auf denen die Playbooks ausgeführt werden können.
 * Statisch eingetragene Server
-* Custom geschriebene dinge
-* Dynamische generierte Server listen aus Cloud anbietern oder sonsigem (AWS, Consul, Google, uvm...)
+* Custom geschriebenes Zeug
+* Dynamische generierte Server Listen aus der Cloud oder sonstigem Tools (AWS, Consul, Google, uvm...)
 
 Zurück zum Anfang:
 ```shell
 ansible localhost -m user -a "name=kathi state=absent"
 ```
-Hier an 2ter stelle sagen wir ansible auf welchem Hosts das Modul ausgeführt werden soll.
+Hier an zweiter Stelle sagen wir ansible auf welchem Hosts das Modul ausgeführt werden soll.
 Bei ansible-playbook tun wir dies im Playbook.
 
 ```yaml
@@ -632,6 +633,7 @@ pc-bn-[01:50]
 ```
 
 #### Connection Types
+Sowie connection Types
 ```yaml
 [client]
 localhost              ansible_connection=local
@@ -639,7 +641,7 @@ other1.example.com     ansible_connection=ssh        ansible_user=mpdehaan
 ```
 
 #### Aufgabe
-* schreibt ein Inventory für euren Play und führt diesen über eine Gruppe aus, das Inventory könnt ihr mit -i angeben
+* Schreibt ein Inventory für euren Play und führt diesen über eine Gruppe aus. Das Inventory könnt ihr mit -i angeben.
 
 ```shell
 ansible-playbook -i inventory play.yaml
@@ -648,18 +650,18 @@ ansible-playbook -i inventory play.yaml
 ### Host & Gruppen Variablen
 Es ist möglich für Hosts und Gruppen Variablen festzulegen, diese können in Plays individuell genutzt werden.
 
-### Standart Gruppen
+### Standard Gruppen
 * all
-    * beinhaltet alle hosts
+    * Beinhaltet alle hosts
 * ungrouped
-    * beinhaltet alle hosts die in keiner weiteren Gruppe sind.
+    * Beinhaltet alle hosts die in keiner weiteren Gruppe sind.
 
 ### Aufgabe
-Ändert euern play so ab das dieser von eurem Rechner eine anderes System provisioniert.
+Ändert euern Play so ab das dieser von eurem Rechner eine anderes System provisioniert.
 
 ## [Ansible - Roles](http://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
 
-ansible-galaxy ist hier dein freund und Helfer.
+ansible-galaxy ist hier dein Freund und Helfer.
 ### Struktur
 ```shell
 ansible-galaxy init ansible-nginx
