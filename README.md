@@ -476,7 +476,8 @@ ansible localhost -e htop_ensure=present -m package -a "name=htop state={{ htop_
       state: present
 ```
 
-### Variablen vom Ziel System
+### Facts
+#### Variablen vom Ziel System
 
 ```shell
 ansible localhost -m setup
@@ -531,6 +532,8 @@ gathering_facts: no # deaktiviert diese
 tasks:
 ...
 ```
+
+### [Register](http://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#registered-variables)
 
 ### [Variablen Scope](http://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
 
