@@ -88,7 +88,7 @@ ansible 2.5.0
 Ansible ist als CLI Tool nutzbar und kann somit sehr einfach ausgeführt werden.
 
 ### Zu Beginn
-Erstellen wir im ersten beispiel einen neuen User:
+Erstellen wir im ersten Beispiel einen neuen Nutzer:
 ```shell
 # ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie"
 
@@ -105,8 +105,8 @@ ubuntu | SUCCESS => {
     "uid": 1000
 }
 ```
-Ansible hat die "Resource" user mit dem namen kathie angelegt.
-Was passiert wenn wir diesen Command nocheinmal ausführen?
+Ansible hat die "Resource" user mit dem namen Kathie angelegt.
+Was passiert wenn wir diesen Kommando nocheinmal ausführen?
 
 ```shell
 # ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie"
@@ -124,7 +124,7 @@ ubuntu | SUCCESS => {
 }
 ```
 
-Verändern wir nun das comment des Users und schauen was passiert.
+Verändern wir nun das Kommentar (comment) des Nutzers und schauen was passiert.
 ```shell
 # ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie comment='Kathie Wiese"
 
@@ -142,20 +142,20 @@ ubuntu | SUCCESS => {
 }
 ```
 
-Dabei fällt aus, dass changed nun wieder auf true steht und der comment nun nicht mehr leer ist.
+Dabei fällt auf, dass "changed" nun wieder auf "true" steht und der Kommentar nun nicht mehr leer ist.
 
 ### ansible adhoc commands
 
-ansible ist ein CLI Tool dies einfach einzusetzen ist.
+ansible ist ein CLI Tool, was einfach einzusetzen ist.
 ```shell
 # ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie comment='Kathie Wiese"
 ```
-* localhost beschreibt hier die hosts auf denen es ausgeführt werden soll.
+* localhost beschreibt hier die Hosts auf denen der Lauf ausgeführt werden soll.
 * -m gibt das Modul an das ausgeführt werden soll
 * -a Beschreibt die Parameter für das Modul, wessen mit -m übergeben wurde z.B. "user"
 
 #### Aufgabe:
-* Installiert das Programm nginx über die Kommando zeile.
+* Installiert das Programm nginx über die Kommandozeile.
 * Deinstalliert das Programm wieder.
 
 #### Beispiele
