@@ -207,10 +207,13 @@ Ansible ist eine Sprache die den zu erreichenden zustand beschreibt. nicht wie m
 * Security Compliance
 * Orchistration
 
-## Architektur & Aufbau
- --- Bild User -> Playbook -> Inventory/Plugins/Modules/API -> Infrastruktur -> Rechner
-                                                                             -> Networking
-                                                                             -> Cloud
+## Architektur & Aufbau Bild
+
+![ansible architecture](talk/ansible_architecture.png "Ansible Architecture")
+
+Quelle: https://www.ansible.com/resources/videos/quick-start-video
+
+
 
 ## Ansible - Playbooks
 
