@@ -213,8 +213,6 @@ Ansible ist eine Sprache die den zu erreichenden zustand beschreibt. nicht wie m
 
 Quelle: https://www.ansible.com/resources/videos/quick-start-video
 
-
-
 ## Ansible - Playbooks
 
 Der Eben erstelle User sollte noch existieren, versuchen wir ihn nun wieder zu löschen.
@@ -570,10 +568,7 @@ http://docs.ansible.com/ansible/latest/user_guide/playbooks_special_topics.html
 
 ## [Ansible - When Statement](http://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html)
 
-## Ansible - Inventories
-
-### Aufgabe
-Ändert euern play so ab das dieser von eurem rechner eine andere Maschine Provisioniert.
+## [Ansible - Inventories](http://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html)
 
 ### Zu Beginn
 Ansible benötigt eine liste von Zielen auf denen die Playbooks ausgeführt werden können.
@@ -581,8 +576,82 @@ Ansible benötigt eine liste von Zielen auf denen die Playbooks ausgeführt werd
 * Custom geschriebene dinge
 * Dynamische generierte Server listen aus Cloud anbietern oder sonsigem (AWS, Consul, Google, uvm...)
 
-## Ansible - Roles
-### Zu Beginn
+Zurück zum Anfang:
+```shell
+ansible localhost -m user -a "name=kathi state=absent"
+```
+Hier an 2ter stelle sagen wir ansible auf welchem Hosts das Modul ausgeführt werden soll.
+Bei ansible-playbook tun wir dies im Playbook.
+
+```yaml
+- hosts: localhost #<----
+  remote_user: root
+  tasks:
+  - name: ensure user Kathie Wiese
+    user:
+      name: kathie
+      comment: "Kathie Wiese"
+      state: absent
+```
+
+Woher bezieht ansible diese Daten?
+### Hosts und Gruppen
+Ansible benutzt dafür eine "Inventory Datei", diese liegt zu allererst in /etc/ansible/inventory, dies ist aber auf viele art änderbar. z.B. mit -i.
+
+```shell
+cat examples/inventory/static_inventory
+```
+```yaml
+localhost
+
+[webservers] # definiert eine Gruppe von Servern
+foo.example.com # definiert die Rechner in der Gruppe
+bar.example.com:1337
+
+[dbservers]
+one.example.com ansible_host=192.168.0.66 ansible_port=5512 # der Host hat keinen DNS Eintrag deshalb kann dieser Verändert werden.
+two.example.com
+three.example.com
+```
+
+Es gibt noch weitere Methoden wie INI und YAML Format.
+
+#### Pattern
+Um es mal erwähnt zu haben, auch Patterns sind möglich.
+
+```yaml
+[desktop]
+pc-bn-[01:50]
+
+```
+
+#### Connection Types
+```yaml
+[client]
+localhost              ansible_connection=local
+other1.example.com     ansible_connection=ssh        ansible_user=mpdehaan
+```
+
+#### Aufgabe
+* schreibt ein Inventory für euren Play und führt diesen über eine Gruppe aus, das Inventory könnt ihr mit -i angeben
+
+```shell
+ansible-playbook -i inventory play.yaml
+```
+
+### Host & Gruppen Variablen
+Es ist möglich für Hosts und Gruppen Variablen festzulegen, diese können in Plays individuell genutzt werden.
+
+### Standart Gruppen
+* all
+    * beinhaltet alle hosts
+* ungrouped
+    * beinhaltet alle hosts die in keiner weiteren Gruppe sind.
+
+### Aufgabe
+Ändert euern play so ab das dieser von eurem Rechner eine anderes System provisioniert.
+
+## [Ansible - Roles](http://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
 
 ansible-galaxy ist hier dein freund und Helfer.
 ### Struktur
