@@ -70,6 +70,8 @@
 
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
+## [Schneller einstig](talk/fun-with-flags.md)
+## [Kurz: Was ist automatisierung]
 ## [Installation](https://docs.ansible.com/ansible/intro_installation.html)
 
 Ansible wird einfach über den Packet manager installiert, oder über pip.
