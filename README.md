@@ -1,7 +1,7 @@
 # Ansible Schulung
 
 ## Table of Contents
-   * [<a href="talk/fun-with-flags.md">Schneller einstig</a>](#schneller-einstig)
+   * [<a href="talk/fun-with-flags.md">Schneller Einstig</a>](#schneller-einstig)
    * [<a href="talk/automationvsprogramming.md">Kurz: Was ist automatisierung</a>](#kurz-was-ist-automatisierung)
    * [<a href="https://docs.ansible.com/ansible/intro_installation.html" rel="nofollow">Installation</a>](#installation)
    * [Ansible erstes Verständnis](#ansible-erstes-verständnis)
@@ -73,7 +73,7 @@
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 
-## [Schneller einstig](talk/fun-with-flags.md)
+## [Schneller Einstig](talk/fun-with-flags.md)
 ## [Kurz: Was ist automatisierung](talk/automationvsprogramming.md)
 ## [Installation](https://docs.ansible.com/ansible/intro_installation.html)
 
