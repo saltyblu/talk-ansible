@@ -693,6 +693,25 @@ Machen wir aus dem bisherigen Play ein richtiges Playbook.
 
 ### [Handlers](http://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#handlers-running-operations-on-change)
 
+
+## [Ansible-Environment](http://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-configuration-settings)
+Ansible ist auf viele Arten Konfigurierbar. Standart Suchpfade für ansible.cfg sind: 
+* ANSIBLE_CONFIG (environment variablen sollten sie gesetzt sein)
+* ansible.cfg (im aktuellen Verzeichnis)
+* ~/.ansible.cfg (im User Home)
+* /etc/ansible/ansible.cfg
+
+### [Ansible Konfigurations Datei](http://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html)
+
+Sample
+```shell
+[defaults]
+inventory         = ./inventory
+host_key_checking = False
+log_path          = /tmp/ansible.log
+roles_path        = ./roles
+```
+
 ## Erweitert
 
 ### [Ansible Galaxy](http://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html)
