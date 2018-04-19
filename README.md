@@ -689,6 +689,7 @@ ansible-nginx/
 
 #### Aufgabe:
 Machen wir aus dem bisherigen Play ein richtiges Playbook.
+
 ### [Includes](https://docs.ansible.com/ansible/2.4/playbooks_reuse_includes.html)
 
 ### [Handlers](http://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#handlers-running-operations-on-change)
@@ -711,6 +712,45 @@ host_key_checking = False
 log_path          = /tmp/ansible.log
 roles_path        = ./roles
 ```
+
+### [Mehr zu ansible-galaxy](http://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html)
+ansible Galaxy ist eine Webseite auf der man seine Playbooks hochladen und "veröffentlichen" kann.
+Dort findet man auch viele bereits fertige Playbooks, welche aber mit vorsicht zu genießen sind, meist erfüllen sie nicht genau den Zweck. Allerdings sind diese sehr gut für anregungen oder als Ausgangspunkt, sofern die Lizens die Zulässt.
+
+#### [requirements.yml](http://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html#installing-multiple-roles-from-a-file)
+Installieren von dependencies aus der galaxy ist möglich.
+```yml
+# from galaxy
+- src: yatesr.timezone
+
+# from GitHub
+- src: https://github.com/bennojoy/nginx
+
+# from GitHub, overriding the name and specifying a specific tag
+- src: https://github.com/bennojoy/nginx
+  version: master
+  name: nginx_role
+
+# from a webserver, where the role is packaged in a tar.gz
+- src: https://some.webserver.example.com/files/master.tar.gz
+  name: http-role
+
+# from Bitbucket
+- src: git+http://bitbucket.org/willthames/git-ansible-galaxy
+  version: v1.4
+
+# from Bitbucket, alternative syntax and caveats
+- src: http://bitbucket.org/willthames/hg-ansible-galaxy
+  scm: hg
+
+# from GitLab or other git-based scm
+- src: git@gitlab.company.com:mygroup/ansible-base.git
+  scm: git
+  version: "0.1"  # quoted, so YAML doesn't parse this as a floating-point value
+```
+
+### Aufgabe
+Erstellt ein gekapseltes environment, was ansibleenv heißt und roles aus ansibleenv/roles bezieht.
 
 ## Erweitert
 
