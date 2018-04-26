@@ -119,7 +119,7 @@ ubuntu | SUCCESS => {
 }
 ```
 Ansible hat die "Resource" User mit dem namen Kathie angelegt.
-Was passiert wenn wir diesen Kommando nocheinmal ausführen?
+Was passiert, wenn wir dieses Kommando noch einmal ausführen?
 
 ```shell
 # ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie"
@@ -137,7 +137,7 @@ ubuntu | SUCCESS => {
 }
 ```
 
-Verändern wir nun das Kommentar (comment) des Nutzers und schauen was passiert.
+Verändern wir nun den Kommentar (comment) des Nutzers und schauen was passiert.
 ```shell
 # ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie comment='Kathie Wiese"
 
@@ -159,13 +159,13 @@ Dabei fällt auf, dass "changed" nun wieder auf "true" steht und der Kommentar n
 
 ### ansible adhoc commands
 
-ansible ist ein CLI Tool, was einfach einzusetzen ist.
+ansible ist ein CLI Tool, das einfach einzusetzen ist.
 ```shell
 # ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie comment='Kathie Wiese"
 ```
 * localhost beschreibt hier die Hosts auf denen der Lauf ausgeführt werden soll.
-* -m gibt das Modul an das ausgeführt werden soll
-* -a Beschreibt die Parameter für das Modul, wessen mit -m übergeben wurde z.B. "user"
+* -m gibt das Modul an, das ausgeführt werden soll
+* -a Beschreibt die Parameter für das Modul, das mit -m übergeben wurde z.B. "user"
 
 #### Aufgabe:
 * Installiert das Programm nginx über die Kommandozeile.
@@ -181,7 +181,7 @@ ansible localhost -C -m package -a "name=vi state=latest"
 ```
 #### Check mode
 Prüft die gegebene Situation auf dem System, ändert aber nichts.
-Nicht alle Module untertzüzen den check mode, diese werden übersprungen.
+Nicht alle Module unterstützen den check mode, diese werden übersprungen.
 Dieser kann mit -C benutzt werden
 
 ```shell
@@ -200,18 +200,18 @@ ansible localhost -C -m package -a "name=vi state=latest"
     * Simple Struktur, Code wird immer von oben nach unten ausgeführt (in order)
     * Schnell "produktiv" gehen
 * Powerfull
-    * "einfach" Anwendbar auf bestehende Infrastruktur
+    * "einfach" anwendbar auf bestehende Infrastruktur
     * Workflow Automatisierung
     * "Lifecycle" Automatisierung
 * Agentless
     * benötigt nur SSH Zugriff (oder WinRM)
-        * keine weiteren Firewall konfigurationen nötig...
-    * keine "clients" die man ausnutzen oder aktuell halten muss.
+        * keine weiteren Firewall-Konfigurationen nötig...
+    * keine "clients", die man ausnutzen oder aktuell halten muss.
 
 ### Zielsetzung
-Ansible versucht jeden schnell an die Automatisierung von IT-Infrastruktur/Prozessen zu bringen und dabei Kompläxität zu verringern.
+Ansible versucht, jeden schnell an die Automatisierung von IT-Infrastruktur/Prozessen zu bringen und dabei Komplexität zu verringern.
 ### Unterschied zu anderen Programmiersprachen
-Ansible ist eine Sprache die den zu erreichenden Zustand beschreibt, nicht wie man zu dem Zustand kommt.
+Ansible ist eine Sprache, die den zu erreichenden Zustand beschreibt, nicht wie man zu dem Zustand kommt.
 
 ### Was kann ansible
 * Config Management
@@ -229,7 +229,7 @@ Quelle: https://www.ansible.com/resources/videos/quick-start-video
 
 ## Ansible - Playbooks
 
-Der eben erstelle User sollte noch existieren, versuchen wir ihn nun wieder zu löschen.
+Der eben erstellte User sollte noch existieren, versuchen wir ihn nun wieder zu löschen.
 Hierfür benutzen wir nun einen "task" und das Subtool "ansible-playbook"
 
 ### Zu Beginn
@@ -245,7 +245,7 @@ Erstellen wir eine Datei auf dem Server mit folgendem Inhalt:
       comment: "Kathie Wiese"
       state: absent
 ```
-Nach dem speichern kann man nun folgenden Befehl ausführen.
+Nach dem Speichern kann man nun folgenden Befehl ausführen:
 
 ```shell
 # ansible-playbook user_absent.yml
@@ -262,7 +262,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=1    changed=1    unreachable=0    failed=0
 ```
 
-Ein weiteres ausführen des Befehls wird keine änderungen vornehmen:
+Ein weiteres Ausführen des Befehls wird keine Änderungen vornehmen:
 ```shell
 # ansible-playbook user_absent.yml
 
@@ -289,13 +289,13 @@ Ansible playbook ist das tool um ansible "plays" und "playbooks" auszuführen.
 
 #### Host & Users
 
-Für jeden Play oder Playbook muss man sich entscheiden für welchen Host und mit welchem User dies ausgeführt werden soll.
+Für jeden Play oder Playbook muss man sich entscheiden, für welchen Host und mit welchem User dieser ausgeführt werden soll.
 
 ```yml
 # examples/plays/user_absent.yml
 ---
-- hosts: localhost # diese Zeile beschreibt für welche hosts der Play oder das Playbook ausgeführt werden soll.
-  remote_user: root # beschreibt als welcher user der Play ausgeführt werden soll.
+- hosts: localhost # diese Zeile beschreibt, für welche hosts der Play oder das Playbook ausgeführt werden soll.
+  remote_user: root # beschreibt, als welcher user der Play ausgeführt werden soll.
 ```
 Genaueres zu Hosts und deren Patterns findet man hier: http://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html
 
@@ -332,7 +332,7 @@ Was das user Modul sonst noch so kann findet man hier: http://docs.ansible.com/a
 ### Beispiele
 Weitere kleine Beispiele liegen in examples/plays
 
-Hier findet man alle ansible standard Module: http://docs.ansible.com/ansible/devel/modules/modules_by_category.html
+Hier findet man alle ansible Standard-Module: http://docs.ansible.com/ansible/devel/modules/modules_by_category.html
 
 ### Ein wenig Mehr
 
@@ -356,7 +356,7 @@ Installieren wir SSHD und sorgen dafür das er beim Systemstart immer ausgeführ
       state: started
 ```
 
-Der Einzig große unterschied zu vorher, ist das wir eine weitere Task definition haben, auch ohne großes Ansible-Verständis ist dieser "Definition leicht lesbar".
+Der einzige große Unterschied zu vorher ist, das wir eine weitere Task-Definition haben, auch ohne großes Ansible-Verständis ist dieser "Definition leicht lesbar".
 
 Ergebnis:
 ```shell
@@ -383,7 +383,7 @@ Lasst uns das Prüfen.
 #### Datei Verwaltung
 Ansible kann nicht nur Pakete und Benutzer verwalten sondern auch Dateien, heirfür gibt es mehrere Möglichkeiten.
 
-Zurück zu unserem vorherigen Beispiel sshd, lass uns dieses etwas erweiern.
+Zurück zu unserem vorherigen Beispiel sshd, lass uns dieses etwas erweitern.
 
 ```yaml
 <snip>
@@ -424,7 +424,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=4    changed=3    unreachable=0    failed=0
 ```
 
-All diese Module sind standard Module und lange nicht alle, was machen diese denn genau?
+All diese Module sind Standard-Module und lange nicht alle, was machen diese denn genau?
 Eine Liste aller "File" Module findet man hier: http://docs.ansible.com/ansible/latest/modules/list_of_files_modules.html
 ##### Module: File
 Dieses Modul beschreibt den Zustand einer Datei.
@@ -433,7 +433,7 @@ http://docs.ansible.com/ansible/devel/modules/file_module.html
 Kopiert Daten vom "Server" System zum Ziel System.
 http://docs.ansible.com/ansible/latest/modules/copy_module.html#copy
 ##### Module: lineinfile
-Es ist auch möglich nur einzelne Teile einer Datei zu verändern und den Rest unverändert zu lassen.
+Es ist auch möglich, nur einzelne Teile einer Datei zu verändern und den Rest unverändert zu lassen.
 http://docs.ansible.com/ansible/latest/modules/lineinfile_module.html#lineinfile
 
 #### Zusammenfassung
@@ -461,10 +461,10 @@ Schreibe einen Play der Folgendes Erledigt:
     * Ansible Tower
 
 Variablen werden in Ansible fast immer mit {{ }} umklammert und in Playbooks zusätzlich mit "".
-Dies ist ein sehr komplexes Thema deshalb, wird auch hier nur auf die Basics eingegangen.
+Dies ist ein sehr komplexes Thema, deshalb wird auch hier nur auf die Basics eingegangen.
 
 ### Variable auf der Kommando Zeile
-Variablen in der Commandline werden mittles -e key=value angegeben, diese können dann im kompletten Ansible-Kontext verwendet werden.
+Variablen in der Commandline werden mittels -e key=value angegeben, diese können dann im kompletten Ansible-Kontext verwendet werden.
 
 #### Beispiel:
 htop installieren:
@@ -536,9 +536,9 @@ localhost | SUCCESS => {
 ...
 ```
 
-Wow, was ein haufen, all diese Variablen sind im ansible Play nutzbar.
-Dieser Vorgang nennt sich bei Playbooks gathering_facts und wird vor jeden Play für jeden Host ausgeführt.
-Dies kann man aber auch deaktivieren, falls man diese variablen nicht braucht:
+Wow, was ein Haufen, all diese Variablen sind im ansible Play nutzbar.
+Dieser Vorgang nennt sich bei Playbooks gathering_facts und wird vor jedem Play für jeden Host ausgeführt.
+Dies kann man aber auch deaktivieren, falls man diese Variablen nicht braucht:
 
 ```yml
 hosts: localhost
@@ -553,7 +553,7 @@ tasks:
 ### [Variablen Scope](http://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
 
 ## [Ansible - Simple Templates](http://docs.ansible.com/ansible/latest/modules/template_module.html)
-Jetzt hat man all den Kram, nun wie wendet man das Sinnvoll an?
+Jetzt hat man all den Kram, wie wendet man das nun sinnvoll an?
 ### Zu Beginn
 
 ```yaml
@@ -582,7 +582,7 @@ Ansible generated message:
 
 ## [Ansible - Einfache Schleifen](http://docs.ansible.com/ansible/devel/user_guide/playbooks_loops.html)
 ### Zu Beginn
-In Ansible sind Schleifen möglich um komplexere Aufgaben zu erldigen.
+In Ansible sind Schleifen möglich um komplexere Aufgaben zu erledigen.
 http://docs.ansible.com/ansible/devel/user_guide/playbooks_loops.html
 http://docs.ansible.com/ansible/latest/user_guide/playbooks_special_topics.html
 
@@ -600,7 +600,7 @@ Zurück zum Anfang:
 ```shell
 ansible localhost -m user -a "name=kathi state=absent"
 ```
-Hier an zweiter Stelle sagen wir ansible auf welchem Hosts das Modul ausgeführt werden soll.
+Hier an zweiter Stelle sagen wir ansible auf welchen Hosts das Modul ausgeführt werden soll.
 Bei ansible-playbook tun wir dies im Playbook.
 
 ```yaml
@@ -616,7 +616,7 @@ Bei ansible-playbook tun wir dies im Playbook.
 
 Woher bezieht ansible diese Daten?
 ### Hosts und Gruppen
-Ansible benutzt dafür eine "Inventory Datei", diese liegt zu allererst in /etc/ansible/inventory, dies ist aber auf viele art änderbar. z.B. mit -i.
+Ansible benutzt dafür eine "Inventory Datei", diese liegt zuallererst in /etc/ansible/inventory, dies ist aber auf viele Arten änderbar. z.B. mit -i.
 
 ```shell
 cat examples/inventory/static_inventory
@@ -629,7 +629,7 @@ foo.example.com # definiert die Rechner in der Gruppe
 bar.example.com:1337
 
 [dbservers]
-one.example.com ansible_host=192.168.0.66 ansible_port=5512 # der Host hat keinen DNS Eintrag deshalb kann dieser Verändert werden.
+one.example.com ansible_host=192.168.0.66 ansible_port=5512 # der Host hat keinen DNS Eintrag deshalb kann dieser verändert werden.
 two.example.com
 three.example.com
 ```
@@ -661,7 +661,7 @@ ansible-playbook -i inventory play.yaml
 ```
 
 ### Host & Gruppen Variablen
-Es ist möglich für Hosts und Gruppen Variablen festzulegen, diese können in Plays individuell genutzt werden.
+Es ist möglich, für Hosts und Gruppen Variablen festzulegen, diese können in Plays individuell genutzt werden.
 
 ### Standard Gruppen
 * all
@@ -670,7 +670,7 @@ Es ist möglich für Hosts und Gruppen Variablen festzulegen, diese können in P
     * Beinhaltet alle hosts die in keiner weiteren Gruppe sind.
 
 ### Aufgabe
-Ändert euern Play so ab das dieser von eurem Rechner eine anderes System provisioniert.
+Ändert euren Play so ab, dass dieser von eurem Rechner eine anderes System provisioniert.
 
 ## [Ansible - Roles](http://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
 
@@ -709,7 +709,7 @@ Machen wir aus dem bisherigen Play ein richtiges Playbook.
 
 
 ## [Ansible-Environment](http://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-configuration-settings)
-Ansible ist auf viele Arten Konfigurierbar. Standart Suchpfade für ansible.cfg sind: 
+Ansible ist auf viele Arten Konfigurierbar. Standard-Suchpfade für ansible.cfg sind: 
 * ANSIBLE_CONFIG (environment variablen sollten sie gesetzt sein)
 * ansible.cfg (im aktuellen Verzeichnis)
 * ~/.ansible.cfg (im User Home)
@@ -727,8 +727,8 @@ roles_path        = ./roles
 ```
 
 ### [Mehr zu ansible-galaxy](http://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html)
-ansible Galaxy ist eine Webseite auf der man seine Playbooks hochladen und "veröffentlichen" kann.
-Dort findet man auch viele bereits fertige Playbooks, welche aber mit vorsicht zu genießen sind, meist erfüllen sie nicht genau den Zweck. Allerdings sind diese sehr gut für anregungen oder als Ausgangspunkt, sofern die Lizens die Zulässt.
+ansible Galaxy ist eine Webseite, auf der man seine Playbooks hochladen und "veröffentlichen" kann.
+Dort findet man auch viele bereits fertige Playbooks, welche aber mit Vorsicht zu genießen sind, meist erfüllen sie nicht genau den Zweck. Allerdings sind diese sehr gut für Anregungen oder als Ausgangspunkt, sofern die Lizens dies zulässt.
 
 #### [requirements.yml](http://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html#installing-multiple-roles-from-a-file)
 Installieren von dependencies aus der galaxy ist möglich.
