@@ -1,0 +1,63 @@
+---
+theme: solarized
+revealOptions:
+    transition: 'fade'
+---
+
+# Ansible Schulung
+
+---
+
+!INCLUDE "./talk/01_intro/01_allgemeines.md"
+
+---
+
+!INCLUDE "./talk/01_intro/02_installation.md"
+
+---
+
+!INCLUDE "./talk/02_einstieg/01_adhoc_cmd.md"
+
+---
+
+!INCLUDE "./talk/02_einstieg/02_aufgabe.md"
+
+---
+
+!INCLUDE "./talk/02_einstieg/03_ansible_definition.md"
+
+---
+
+!INCLUDE "./talk/03_playbooks/01_playbooks.md"
+
+---
+
+!INCLUDE "./talk/03_playbooks/02_dateiverwaltung.md"
+
+---
+
+!INCLUDE "./talk/03_playbooks/03_aufgabe.md"
+
+---
+
+!INCLUDE "./talk/03_playbooks/04_variablen.md"
+
+---
+
+!INCLUDE "./talk/03_playbooks/05_templates.md"
+
+---
+
+!INCLUDE "./talk/03_playbooks/06_loop.md"
+
+---
+
+!INCLUDE "./talk/03_playbooks/07_inventory.md"
+
+---
+
+!INCLUDE "./talk/04_environment/01_roles_und_mehr.md"
+
+---
+
+Ende
