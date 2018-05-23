@@ -18,7 +18,7 @@ revealOptions:
 
 !INCLUDE "./talk/02_einstieg/01_adhoc_cmd.md"
 
----
+----
 
 !INCLUDE "./talk/02_einstieg/02_aufgabe.md"
 
@@ -34,7 +34,7 @@ revealOptions:
 
 !INCLUDE "./talk/03_playbooks/02_dateiverwaltung.md"
 
----
+----
 
 !INCLUDE "./talk/03_playbooks/03_aufgabe.md"
 

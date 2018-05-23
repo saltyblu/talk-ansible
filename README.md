@@ -1,5 +1,7 @@
 # Ansible Schulung
 
+https://github.com/trinker/reveal/blob/master/PRESENTATION/reveal.md#/0
+
 ## Table of Contents
    * [<a href="talk/fun-with-flags.md">Schneller Einstig</a>](#schneller-einstig)
    * [<a href="talk/automationvsprogramming.md">Kurz: Was ist automatisierung</a>](#kurz-was-ist-automatisierung)
@@ -87,6 +89,7 @@ $ sudo apt-get install ansible
 ```
 
 Prüfen ob ansible "funktioniert"
+
 ```shell
 # ansible --version
 ansible 2.5.0
@@ -96,6 +99,7 @@ ansible 2.5.0
   executable location = /usr/bin/ansible
   python version = 2.7.12 (default, Dec  4 2017, 14:50:18) [GCC 5.4.0 20160609]
 ```
+
 ## Ansible erstes Verständnis
 
 Ansible ist als CLI Tool nutzbar und kann somit sehr einfach ausgeführt werden.
@@ -709,7 +713,7 @@ Machen wir aus dem bisherigen Play ein richtiges Playbook.
 
 
 ## [Ansible-Environment](http://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-configuration-settings)
-Ansible ist auf viele Arten Konfigurierbar. Standard-Suchpfade für ansible.cfg sind: 
+Ansible ist auf viele Arten Konfigurierbar. Standard-Suchpfade für ansible.cfg sind:
 * ANSIBLE_CONFIG (environment variablen sollten sie gesetzt sein)
 * ansible.cfg (im aktuellen Verzeichnis)
 * ~/.ansible.cfg (im User Home)

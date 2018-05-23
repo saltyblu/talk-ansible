@@ -1,7 +1,7 @@
 ## Was ist ansible
 
-1. ansible ist eine simple "automation-language"
-2. außerdem ist ansible auch die "automation engine" die "playbooks" ausführt
+* ansible ist eine simple "automation-language"
+* außerdem ist ansible auch die "automation engine" die "playbooks" ausführt
 
 ### Was kann ansible
 

@@ -10,8 +10,6 @@ sudo apt-get update
 sudo apt-get install ansible
 ```
 
-----
-
 ## Prüfen ob alles geht
 
 Prüfen ob ansible "funktioniert"
