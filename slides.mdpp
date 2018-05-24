@@ -1,7 +1,11 @@
 ---
-theme: solarized
+theme: dark
+center: false
+left: true
 revealOptions:
     transition: 'fade'
+    slideNumber: true
+    progress: true
 ---
 
 # Ansible Schulung

@@ -1,7 +1,11 @@
 ---
-theme: solarized
+theme: dark
+center: false
+left: true
 revealOptions:
     transition: 'fade'
+    slideNumber: true
+    progress: true
 ---
 
 # Ansible Schulung
@@ -80,8 +84,6 @@ sudo apt-get update
 sudo apt-get install ansible
 ```
 
-----
-
 ## Prüfen ob alles geht
 
 Prüfen ob ansible "funktioniert"
@@ -106,6 +108,8 @@ Ansible ist als CLI Tool nutzbar und kann somit sehr einfach ausgeführt werden.
 
 Erstellen wir im ersten Beispiel einen neuen Nutzer:
 
+### Erstes beispiel
+
 ```shell
 ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie"
 ```
@@ -129,13 +133,13 @@ Ansible hat die "Resource" User mit dem namen Kathie angelegt.
 
 ----
 
+### Das Selbe nochmal
+
 Was passiert, wenn wir dieses Kommando noch einmal ausführen?
 
 ```shell
 # ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie"
-```
 
-```shell
 ubuntu | SUCCESS => {
     "append": false,
     "changed": false,
@@ -152,13 +156,13 @@ ubuntu | SUCCESS => {
 
 ----
 
+### Das Selbe ein wenig anders
+
 Verändern wir nun den Kommentar (comment) des Nutzers und schauen was passiert.
 
 ```shell
 # ansible localhost -m "user" -a "name=kathie state=present home=/home/kathie comment='Kathie Wiese"
-```
 
-```shell
 ubuntu | SUCCESS => {
     "append": false,
     "changed": true,
@@ -175,6 +179,8 @@ ubuntu | SUCCESS => {
 
 Dabei fällt auf, dass "changed" nun wieder auf "true" steht und der Kommentar nun nicht mehr leer ist.
 
+----
+
 ### ansible adhoc commands
 
 ansible ist ein CLI Tool, das einfach einzusetzen ist.
@@ -186,6 +192,8 @@ ansible ist ein CLI Tool, das einfach einzusetzen ist.
 * localhost beschreibt hier die Hosts auf denen der Lauf ausgeführt werden soll.
 * -m gibt das Modul an, das ausgeführt werden soll
 * -a Beschreibt die Parameter für das Modul, das mit -m übergeben wurde z.B. "user"
+
+----
 
 #### Check mode
 
@@ -207,9 +215,9 @@ ansible localhost -m package -a "name=vi state=latest"
 ansible localhost -C -m package -a "name=vi state=latest"
 ```
 
----
+----
 
-#### Aufgabe:
+### Aufgabe:
 
 * Installiert das Programm nginx über die Kommandozeile.
 * Deinstalliert das Programm wieder.
@@ -218,8 +226,8 @@ ansible localhost -C -m package -a "name=vi state=latest"
 
 ## Was ist ansible
 
-1. ansible ist eine simple "automation-language"
-2. außerdem ist ansible auch die "automation engine" die "playbooks" ausführt
+* ansible ist eine simple "automation-language"
+* außerdem ist ansible auch die "automation engine" die "playbooks" ausführt
 
 ### Was kann ansible
 
@@ -517,7 +525,7 @@ Nun haben wir schon einiges gesehen:
 * Das Zusammenführen von mehreren Tasks in einem Play
 * Manipulation von "services", Dateien, Paketen und Benutzern
 
----
+----
 
 #### Aufgabe
 
