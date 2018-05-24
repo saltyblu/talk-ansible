@@ -10,6 +10,8 @@ revealOptions:
 
 # Ansible Schulung
 
+![Ansible](ansible_logo.png)
+
 ---
 
 !INCLUDE "./talk/01_intro/01_allgemeines.md"

@@ -10,6 +10,8 @@ revealOptions:
 
 # Ansible Schulung
 
+![Ansible](ansible_logo.png)
+
 ---
 
 ## Allgemeines
