@@ -16,6 +16,7 @@ body {
   background: #fff;
   background-color: #fff; */
   background-image: url("background_block.jpg");
+  background-size: 100%;
 }
 
 .reveal {
