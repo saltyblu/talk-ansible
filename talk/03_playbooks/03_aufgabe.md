@@ -5,4 +5,4 @@ Schreibe einen Play der Folgendes Erledigt:
 * Nginx installieren
 * Service nginx starten
 * Service nginx bei jedem start mit hochfahren
-* Eine rudimentaere "Welcome Page"
+* Eine rudimentäre "Welcome Page"

@@ -1,6 +1,6 @@
 ## Installation
 
-Ansible wird einfach über den Packet manager installiert, oder über pip.
+Ansible wird einfach über den Paket manager installiert, oder über pip.
 
 ```shell
 sudo apt-get update

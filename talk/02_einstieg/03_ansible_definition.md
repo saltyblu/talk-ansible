@@ -10,7 +10,7 @@
 * Provisionierung
 * Continous Delivery
 * Security Compliance
-* Orchistration
+* Orchestration
 
 ----
 

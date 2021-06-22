@@ -18,8 +18,8 @@ in dieser Gruppe befinden sich auch diverse andere Tools
 * Anforderungen an die Infrastruktur manifestieren
 * Nachvollziehbarkeit von Konfigurations anpassungen
 * Manuelle Arbeiten minimieren
-* Zustände des Systems definieren und reprodozieren können
-* Testbarkeit der Infrastruktur erhöhen
+* Zustände des Systems definieren und reproduzieren können
+* Testen der Infrastruktur erhöhen
 
 ----
 
@@ -38,9 +38,9 @@ Ansible muss auch wie alle anderen Tools für Idempotenz sorgen, bedeutet das me
 
 ### Fazit Ansible und Co. vs Golang Java und Co.
 
-Golang Java und derivate sind imperative Proggramiersprachen. Puppet Chef und im Ansatz auch Ansible sind deklarativ.
+Golang Java und derivate sind imperative Programmiersprachen. Puppet Chef und im Ansatz auch Ansible sind deklarativ.
 
-#### Einfach gehlaten
+#### Einfach gehalten
 
 Als Entwickler (Golang, Java und Co.) beschreibt man den Weg (zum Ziel)!
 Mit Automatisierungsprachen beschreibt man das Ziel (ohne den Weg)!

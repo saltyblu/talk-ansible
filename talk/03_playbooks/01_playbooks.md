@@ -104,7 +104,7 @@ Bleiben wir bei unserer "Kathie"
 
 Solche "snippets" werden Tasks genannt. Diese beinhalten einzelne Module für eine bestimmte Gruppe von Hosts.
 
-Dies ist auch immernoch mit "ansible" ausfühbar:
+Dies ist auch immernoch mit "ansible" ausführbar:
 
 ```shell
 ansible localhost -m user -a "name=kathie comment='Kathie Wiese' state=absent"
@@ -146,7 +146,7 @@ Installieren wir SSHD und sorgen dafür das er beim Systemstart immer ausgeführ
       state: started
 ```
 
-Der einzige große Unterschied zu vorher ist, das wir eine weitere Task-Definition haben, auch ohne großes Ansible-Verständis ist dieser "Definition leicht lesbar".
+Der einzige große Unterschied zu vorher ist, das wir eine weitere Task-Definition haben, auch ohne großes Ansible-Verständiss ist dieser "Definition leicht lesbar".
 
 Ergebnis:
 

@@ -3,7 +3,7 @@
 https://github.com/trinker/reveal/blob/master/PRESENTATION/reveal.md#/0
 
 ## Table of Contents
-   * [<a href="talk/fun-with-flags.md">Schneller Einstig</a>](#schneller-einstig)
+   * [<a href="talk/fun-with-flags.md">Schneller Einstieg</a>](#schneller-einstieg)
    * [<a href="talk/automationvsprogramming.md">Kurz: Was ist automatisierung</a>](#kurz-was-ist-automatisierung)
    * [<a href="https://docs.ansible.com/ansible/intro_installation.html" rel="nofollow">Installation</a>](#installation)
    * [Ansible erstes Verständnis](#ansible-erstes-verständnis)
@@ -75,11 +75,11 @@ https://github.com/trinker/reveal/blob/master/PRESENTATION/reveal.md#/0
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 
-## [Schneller Einstig](talk/fun-with-flags.md)
+## [Schneller Einstieg](talk/fun-with-flags.md)
 ## [Kurz: Was ist automatisierung](talk/automationvsprogramming.md)
 ## [Installation](https://docs.ansible.com/ansible/intro_installation.html)
 
-Ansible wird einfach über den Packet manager installiert, oder über pip.
+Ansible wird einfach über den Paket manager installiert, oder über pip.
 ```shell
 $ sudo apt-get update
 $ sudo apt-get install software-properties-common
@@ -194,7 +194,7 @@ ansible localhost -C -m package -a "name=vi state=latest"
 
 ## Was ist ansible
 1. ansible ist eine simple "automation-language"
-2. außerdem ist ansible auch die "automation engine" die "playbooks" ausführt
+2. außerdem ist ansible auch die "automation engine" die "Playbooks" ausführt
 
 ### Kernziele
 * Einfachheit
@@ -223,7 +223,7 @@ Ansible ist eine Sprache, die den zu erreichenden Zustand beschreibt, nicht wie 
 * Provisionierung
 * Continous Delivery
 * Security Compliance
-* Orchistration
+* Orchestration
 
 ## Architektur & Aufbau Bild
 
@@ -282,7 +282,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=2    changed=0    unreachable=0    failed=0
 ```
 
-Cool, somit habt ihr euren ersten play geschrieben und ausgeführt.
+Cool, somit habt ihr euren ersten Play geschrieben und ausgeführt.
 
 ### ansible-playbook
 Ansible playbook ist das tool um ansible "plays" und "playbooks" auszuführen.
@@ -322,7 +322,7 @@ Bleiben wir bei unserer "Kathie"
 #### Tasks
 Solche "snippets" werden Tasks genannt. Diese beinhalten einzelne Module für eine bestimmte Gruppe von Hosts.
 
-Dies ist auch immernoch mit "ansible" ausfühbar:
+Dies ist auch immernoch mit "ansible" ausführbar:
 ```shell
 ansible localhost -m user -a "name=kathie comment='Kathie Wiese' state=absent"
 ```
@@ -360,7 +360,7 @@ Installieren wir SSHD und sorgen dafür das er beim Systemstart immer ausgeführ
       state: started
 ```
 
-Der einzige große Unterschied zu vorher ist, das wir eine weitere Task-Definition haben, auch ohne großes Ansible-Verständis ist dieser "Definition leicht lesbar".
+Der einzige große Unterschied zu vorher ist, das wir eine weitere Task-Definition haben, auch ohne großes Ansible-Verständiss ist dieser "Definition leicht lesbar".
 
 Ergebnis:
 ```shell
@@ -385,7 +385,7 @@ Lasst uns das Prüfen.
 ```
 
 #### Datei Verwaltung
-Ansible kann nicht nur Pakete und Benutzer verwalten sondern auch Dateien, heirfür gibt es mehrere Möglichkeiten.
+Ansible kann nicht nur Pakete und Benutzer verwalten sondern auch Dateien, hierführ gibt es mehrere Möglichkeiten.
 
 Zurück zu unserem vorherigen Beispiel sshd, lass uns dieses etwas erweitern.
 
@@ -558,6 +558,7 @@ tasks:
 
 ## [Ansible - Simple Templates](http://docs.ansible.com/ansible/latest/modules/template_module.html)
 Jetzt hat man all den Kram, wie wendet man das nun sinnvoll an?
+
 ### Zu Beginn
 
 ```yaml
